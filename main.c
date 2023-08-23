@@ -27,6 +27,8 @@ int main(int arg_count, char *arg_vec[])
 
 	while (fgets(opcode, sizeof(opcode), file) != NULL)
 	{
+		strtok(opcode, "\n");
+
 		if (sscanf(opcode, "push %d", &value) == 1)
 		{
 			push(&stack, value);
