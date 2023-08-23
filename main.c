@@ -7,14 +7,14 @@
  */
 int main(int arg_count, char *arg_vec[])
 {
-	char *k;
 	FILE *file;
-	char read_bytes[1024];
+	stack_t *stack = NULL;
+	char opcode[100];
+	int value;
 
 	if (arg_count != 2)
 	{
 		fprintf(stderr, "USAGE: %s file\n", arg_vec[0]);
-
 		return (EXIT_FAILURE);
 	}
 
@@ -22,20 +22,26 @@ int main(int arg_count, char *arg_vec[])
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", arg_vec[1]);
-
 		return (EXIT_FAILURE);
 	}
-	while (1)
+
+	while (fgets(opcode, sizeof(opcode), file) != NULL)
 	{
-		k = fgets(read_bytes, sizeof(read_bytes), file);
-				if (k == NULL)
-				{
-				break;
-				}
-
-				printf("%s", read_bytes);
+		if (sscanf(opcode, "push %d", &value) == 1)
+		{
+			push(&stack, value);
+		}
+		else if (strcmp(opcode, "pall\n") == 0)
+		{
+			pall(stack);
+		}
+		else
+		{
+			fprintf(stderr, "Unknown opcode: %s", opcode);
+			fclose(file);
+			return (EXIT_FAILURE);
+		}
 	}
-				fclose(file);
-				return (0);
+	fclose(file);
+	return (0);
 }
-
