@@ -11,6 +11,7 @@ int main(int arg_count, char *arg_vec[])
 	stack_t *stack = NULL;
 	char opcode[100];
 	int value;
+	char *trimmed_opcode = opcode;
 
 	if (arg_count != 2)
 	{
@@ -27,19 +28,21 @@ int main(int arg_count, char *arg_vec[])
 
 	while (fgets(opcode, sizeof(opcode), file) != NULL)
 	{
-		strtok(opcode, "\n");
+		  opcode[strcspn(opcode, "\n")] = '\0';
 
-		if (sscanf(opcode, "push %d", &value) == 1)
+		  while (*trimmed_opcode == ' ') trimmed_opcode++;
+
+		 if (sscanf(trimmed_opcode, "push %d", &value) == 1)
 		{
 			push(&stack, value);
 		}
-		else if (strcmp(opcode, "pall\n") == 0)
+		else if (strcmp(trimmed_opcode, "pall") == 0)
 		{
 			pall(stack);
 		}
 		else
 		{
-			fprintf(stderr, "Unknown opcode: %s", opcode);
+			fprintf(stderr, "Unknown opcode: %s\n", trimmed_opcode);
 			fclose(file);
 			return (EXIT_FAILURE);
 		}
