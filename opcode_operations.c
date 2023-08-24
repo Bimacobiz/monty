@@ -1,40 +1,46 @@
 #include "monty.h"
+#define UNUSED(x) (void)(x)
+
 /**
 * push - adds an element onto the stack
-* @top: A pointer to a pointer to the top of the stack.
-* @val: interger value to be pushed to the stack
+* @stack: A pointer to a pointer to the top of the stack.
+* @line_number: Line number in the bytecode file
+* where the push instruction is encountered.
 */
-void push(stack_t **top, int val)
+void push(stack_t **stack, unsigned int line_number)
 {
-	int val = atoi(val_str);
 	stack_t *new_node;
-	
+
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failure\n");
-		exit(EXIT_FAILURE);
+		 cleanup_and_exit(*stack, EXIT_FAILURE);
 	}
-	new_node->n = val;
+	new_node->n = line_number;
 	new_node->prev = NULL;
-	new_node->next = *top;
+	new_node->next = *stack;
 
-	if (*top != NULL)
+	if (*stack != NULL)
 	{
-		(*top)->prev = new_node;
+		(*stack)->prev = new_node;
 	}
-	*top = new_node;
+	*stack = new_node;
 }
 
 /**
 * pall - Prints stack values
-* @top: A pointer to the top of the stack.
+* @stack: A pointer to the top of the stack
+* @line_number: Line number in the bytecode file
+* where the pall instruction is encountered.
 */
-void pall(stack_t *top)
+void pall(stack_t **stack, unsigned int line_number)
 {
-	while (top != NULL)
+	UNUSED(line_number);
+
+	while (*stack != NULL)
 	{
-		printf("%d\n", top->n);
-		top = top->next;
+		 printf("%d\n", (*stack)->n);
+		 *stack = (*stack)->next;
 	}
 }
