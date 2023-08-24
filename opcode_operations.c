@@ -6,9 +6,8 @@
 */
 void push(stack_t **top, int val)
 {
-	int val = atoi(val_str);
 	stack_t *new_node;
-	
+
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 	{

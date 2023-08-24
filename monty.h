@@ -23,5 +23,4 @@ void process_opcode(stack_t **stack, const char *opcode);
 void cleanup_and_exit(stack_t *stack, int exit_code);
 void pall(stack_t *top);
 void push(stack_t **top, int val);
-
 #endif /* MONTY_H */
