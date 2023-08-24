@@ -1,11 +1,17 @@
 #include "monty.h"
 
+<<<<<<< HEAD
 instruction_t instructions[] = {
     {"push", push},
     {"pall", pall},
     {NULL, NULL}
 };
 
+=======
+int main(int arg_count, char *arg_vec[]);
+void process_opcode(stack_t **stack, const char *opcode);
+void cleanup_and_exit(stack_t *stack, int exit_code);
+>>>>>>> 3b69a534796171cf93cee5e1faa3c37d56114be0
 /**
  * main - Entry point of the program
  * @arg_count: Number of arguments passed to the program
@@ -17,7 +23,17 @@ int main(int arg_count, char *arg_vec[])
 	FILE *file;
 	stack_t *stack = NULL;
 	char opcode[100];
+<<<<<<< HEAD
 	unsigned int line_number = 1;
+=======
+	
+	while (fgets(opcode, sizeof(opcode), stdin))
+	{
+        if (opcode[0] == '#')
+	{
+            continue;
+        }
+>>>>>>> 3b69a534796171cf93cee5e1faa3c37d56114be0
 
 	if (arg_count != 2)
 	{
