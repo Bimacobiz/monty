@@ -14,7 +14,7 @@ int main(int arg_count, char *arg_vec[])
 
 	if (arg_count != 2)
 	{
-		fprintf(stderr, "USAGE: %s file\n", arg_vec[0]);
+		fprintf(stderr, "USAGE: monty file\n");
 		return (EXIT_FAILURE);
 	}
 
