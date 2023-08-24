@@ -56,24 +56,23 @@ void process_opcode(stack_t **stack, const char *opcode, unsigned int line_numbe
 {
         char trimmed_opcode[100];
         int i;
-	stack_t *temp_stack = stack;
+	stack_t *temp_stack = *stack;
 
         if (sscanf(opcode, " %99s", trimmed_opcode) != 1)
         {
-                fprintf(stderr, "Error: Failed to parse opcode\n");
+                fprintf(stderr, "L%d: Failed to parse opcode\n", line_number);
                 cleanup_and_exit(*stack, EXIT_FAILURE);
         }
 
         for (i = 0; instructions[i].opcode != NULL; i++)
         {
                 if (strcmp(trimmed_opcode, instructions[i].opcode) == 0)
-                {
-                        stack_t *temp_stack = stack;
+		{
 			instructions[i].f(&temp_stack, line_number);
                         return;
                 }
         }
-        fprintf(stderr, "Unknown opcode: %s\n", trimmed_opcode);
+        fprintf(stderr, "L%d: Unknown opcode: %s\n", line_number, trimmed_opcode);
         cleanup_and_exit(*stack, EXIT_FAILURE);
 }
 

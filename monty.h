@@ -38,5 +38,6 @@ void pall(stack_t **stack, unsigned int line_number);
 void cleanup_and_exit(stack_t *stack, int exit_code);
 void process_opcode(stack_t **stack, const char *opcode, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
-stack_t *pop(stack_t **top, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+
 #endif /* MONTY_H */
