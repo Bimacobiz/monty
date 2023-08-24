@@ -19,7 +19,6 @@ typedef struct stack_s
         struct stack_s *next;
 } stack_t;
 
-<<<<<<< HEAD
 /**
  * struct instruction_s - struc definition rep an instruction
  * @opcode: the opcode of the instruction
@@ -33,16 +32,11 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-=======
->>>>>>> 3b69a534796171cf93cee5e1faa3c37d56114be0
 int main(int arg_count, char *arg_vec[]);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void cleanup_and_exit(stack_t *stack, int exit_code);
-<<<<<<< HEAD
 void process_opcode(stack_t **stack, const char *opcode, unsigned int line_number);
-=======
-void pall(stack_t *top);
-void push(stack_t **top, int val);
->>>>>>> 3b69a534796171cf93cee5e1faa3c37d56114be0
+void pint(stack_t **stack, unsigned int line_number);
+stack_t *pop(stack_t **top, unsigned int line_number);
 #endif /* MONTY_H */
