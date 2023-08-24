@@ -18,6 +18,7 @@ typedef struct stack_s
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
+
 int main(int arg_count, char *arg_vec[]);
 void process_opcode(stack_t **stack, const char *opcode);
 void cleanup_and_exit(stack_t *stack, int exit_code);

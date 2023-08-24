@@ -11,6 +11,13 @@ int main(int arg_count, char *arg_vec[])
 	FILE *file;
 	stack_t *stack = NULL;
 	char opcode[100];
+	
+	while (fgets(opcode, sizeof(opcode), stdin))
+	{
+        if (opcode[0] == '#')
+	{
+            continue;
+        }
 
 	if (arg_count != 2)
 	{
