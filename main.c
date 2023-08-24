@@ -1,5 +1,8 @@
 #include "monty.h"
 
+int main(int arg_count, char *arg_vec[]);
+void process_opcode(stack_t **stack, const char *opcode);
+void cleanup_and_exit(stack_t *stack, int exit_code);
 /**
  * main - Entry point of the program
  * @arg_count: Number of arguments passed to the program
