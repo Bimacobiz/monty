@@ -10,6 +10,8 @@
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_node;
+	char *opera;
+	int nu;
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
@@ -17,7 +19,17 @@ void push(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "Error: malloc failure\n");
 		cleanup_and_exit(*stack, EXIT_FAILURE);
 	}
-	new_node->n = line_number;
+
+	opera = strtok(NULL, DELIMS);
+	if (opera == NULL)
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		cleanup_and_exit(*stack, EXIT_FAILURE);
+	}
+
+	nu = atoi(opera);
+
+	new_node->n = nu;
 	new_node->prev = NULL;
 	new_node->next = *stack;
 
@@ -34,6 +46,7 @@ void push(stack_t **stack, unsigned int line_number)
  * @line_number: Line number in the bytecode file
  * where the pall instruction is encountered.
  */
+
 void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
